@@ -36,7 +36,7 @@ namespace TrackAbout.BarcodeImageService
             // GS1 General Specification define that GS1-128 (the formal application of Code 128 to the supply chain industry) has a limits of 48 characters per symbol.
             // But technically, there's no limit as long as the device can read it.
             // Let's set our limit to a reasonable 100.
-            const int maxStringLength = 2048;
+            const int maxValueLength = 2048;
             const string defaultImageWidth = "0";
             const string defaultImageHeight = "40";
             const int minImageWidth = 0;
@@ -45,17 +45,16 @@ namespace TrackAbout.BarcodeImageService
             const int maxImageHeight = 2048;
             const string defaultMargin = "0";
             const int maxMargin = 200;
-
-
+            
             // Validate the value, v
             if (!req.Query.ContainsKey("v"))
             {
                 return new BadRequestObjectResult("No value 'v' specified. You must specify the value you wish to encode.");
             }
             string value = req.Query["v"];
-            if (value.Length > maxStringLength)
+            if (value.Length > maxValueLength)
             {
-                return new BadRequestObjectResult($"Invalid length for value 'v'. This API will not render a barcode longer than {maxStringLength} characters.");
+                return new BadRequestObjectResult($"Invalid length for value 'v'. This API will not render a barcode longer than {maxValueLength} characters.");
             }
 
             // Validate the output format 'fmt'.
