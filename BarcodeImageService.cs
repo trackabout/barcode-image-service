@@ -45,6 +45,9 @@ namespace TrackAbout.BarcodeImageService
             const int maxImageHeight = 2048;
             const string defaultMargin = "0";
             const int maxMargin = 200;
+
+            // Log the querystring.
+            log.LogInformation($"querystring: {req.QueryString.Value}");
             
             // Validate the value, v
             if (!req.Query.ContainsKey("v"))
