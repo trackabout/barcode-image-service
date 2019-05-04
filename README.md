@@ -1,4 +1,4 @@
-﻿# TrackAbout Barcode Image Service Azure Function
+﻿# Barcode Image Service Azure Function
 
 This project deploys an Azure Function on .NET Core 2.0. The function renders renders barcodes in various symbologies/formats and sizes.
 
