@@ -157,7 +157,7 @@ namespace TrackAbout.BarcodeImageService
                 byte[] bytes;
 
                 // zxing.net already add the human readable for barcodes like Code 128.
-                if (includeHumanReadable && string.Compare(symbologyStr, BarcodeFormat.QR_CODE.ToString(), false) == 0)
+                if (includeHumanReadable && string.Compare(symbologyStr, BarcodeFormat.QR_CODE.ToString(), true) == 0)
                 {
                     var modifiedSvg = AddHumanReadable(svgContent.ToString(), value);
                     bytes = Encoding.UTF8.GetBytes(modifiedSvg);
