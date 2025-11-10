@@ -6,6 +6,7 @@ This project depends on:
 
 - [ZXing](https://github.com/zxing/zxing/) licened under Apache v2.0.
 - [SixLabors ImageSharp](https://github.com/SixLabors/ImageSharp) licensed under Apache v2.0.
+- [SixLabors ImageSharp Drawing]https://github.com/SixLabors/ImageSharp.Drawing licensed under Apache v2.0.
 
 ## Querystring Arguments
 
@@ -19,6 +20,7 @@ fmt | The output file format. _Default: png_. Options are 'png' and 'svg'. Heigh
 h | The height, in pixels, of the rendered barcode. _Default: 40 pixels_. For QR Code, there are certain jump-points between sizes that will cause a change in the outputted image size. Each Matrix code type has symmetrical representation requirements. It will always jump to an even number that is a multiple of the codeword size.
 w | The width, in pixels, of the rendered barcode. _Default: 0, which means 'unset'_ For 1D barcodes (like Code 128), leave unset to let the rendering engine decide.
 m | Margins, in pixels. _Default: 0_. For 1D barcodes, this modifies the left and right margins. Top and bottom are untouched.
+ihr | Set as 'True' if you want to see the human readable bellow the barcode/qr code. _Default:False 
 
 ## Examples
 
@@ -35,14 +37,6 @@ Encode the same QR Code, output to SVG.
  `/api/barcode?v=Hello%20World&sym=QR_CODE&fmt=svg`
 
 ## Known Limitations
-
-### No printed values
-
-This service cannot render the text of the value below the barcode.
-This is a limitation of the Azure Functions platform, which does not allow use of routines that access the GDI graphics interface.
-GDI is needed for font rendering. `System.Drawing` routines for rendering fonts are not available.
-
-There's probably a workaround for this for the properly motivated developer.
 
 ### Only PNG or SVG
 PNG generally produces the smallest file sizes for barcodes compared to JPEG, GIF and BMP.
