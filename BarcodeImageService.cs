@@ -3,8 +3,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Azure.Functions.Worker;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using SixLabors.ImageSharp;
@@ -14,18 +13,23 @@ using ZXing.Common;
 
 namespace TrackAbout.BarcodeImageService
 {
-    public static class BarcodeImageService
+    public class BarcodeImageService
     {
+        private readonly ILogger<BarcodeImageService> log;
+
+        public BarcodeImageService(ILogger<BarcodeImageService> log)
+        {
+            this.log = log;
+        }
+
         /// <summary>
         /// Returns a Code-128 barcode in PNG format.
         /// </summary>
         /// <param name="req"></param>
-        /// <param name="log"></param>
         /// <returns></returns>
-        [FunctionName("barcode")]
-        public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,
-            ILogger log)
+        [Function("barcode")]
+        public async Task<IActionResult> Run(
+            [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req)
         {
 
             // FYI, sizes are a little weird when rending QR codes. Setting to certain values seems to not "take"
